@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema(
 userSchema.pre("save", async function(next){
     if(!this.isModifies("password")) return next()// to avoid hashing this password everytime when save is triggered
 
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
